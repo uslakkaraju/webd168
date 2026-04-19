@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Practice file for learning CSS selectors and modern HTML structure."
+    />
+    <title>Selector Basics</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"
+    />
+    <style>
+      body {
+        background-color: rgb(50,122,167);
+        padding: 0 200px 20px 20px;
+        margin:0;      
+      }
+      p{
+        color:rgba(255,255,255,0.8);
+        font-size: 1em;
+        font-family: "Varela Round", Arial, Helvetica, sans-serif;
+      }
+      :is(h1, h2, h3){
+        color: rgb(255,255,255);
+        font-family: Arial, "Palatino Linotype", Times, serif;
+        border-bottom: 2px solid rgb(87,185,178);
+        padding-top: 10px;
+        padding-bottom: 5px;
+      }
+      h1{font-size: 2em;
+      }
+      #logo{
+             font-family: Baskerville, palatino, sans-serif !important;
+             font-size: 2rem;
+             color: rgba(255,255,255,0.8);
+             font-style: italic;
+             text-align: center;
+             margin-bottom: 30px;
+             background-color: rgb(191,91,116);
+             border-radius: 0 0 10px 10px;
+             padding: 10px;
+            }
+      .note{
+        color: #fff;
+        border: 2px solid #fff;
+        background-color: rgb(69,189,102);
+        margin-top: 25px;
+        margin-bottom: 35px;
+        padding: 20px;}
+        .note strong{
+          color: #fc6512;          
+        }
+        article{
+          max-width: 760px; /*maw760*/
+          margin: 0 auto;
+        }
+        h1+p{color: rgb(255,255,255);
+        font-size: 1.2em;
+      line-height: 140%;}
+      article a{
+        color: rgb(9, 114, 51);        
+      }
+      p+h3{
+        font-style: italic;
+      }
+      .notme{
+        color: rgb(192, 32, 32);
+        background-color: rgb(128, 91, 191);
+        border: 2px solid rgb(191,91,116);
+        padding: 15px;
+        margin-top: 30px;
+      }
+      </style>
+  </head>
+  <body>
+    <header><div id="logo">CSS: The Missing Manual</div>      
+    </header>
+
+    <article>
+      <h1>The Amazing World of CSS</h1>
+      <p>
+        <strong><a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS">CSS</a></strong>
+        (Cascading Style Sheets) allows you to create great-looking web pages. Cascading
+        Style Sheets (CSS) is a style sheet language used for describing the
+        presentation of a document written in a markup language such as HTML.
+        CSS is a cornerstone technology of the World Wide Web, alongside HTML
+        and JavaScript.
+      </p>
+      <p>
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?
+      </p>
+      <p class="note">
+        <strong>NOTE:</strong> Ut enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+        commodi consequatur?
+      </p>
+
+      <h2>Who Knew CSS Had Such Power?</h2>
+      <p>
+        Separation of formatting and content also makes it feasible to present
+        the same markup page in different styles for different rendering
+        methods, such as on-screen, in print, by voice (via speech-based browser
+        or screen reader), and on Braille-based tactile devices. CSS also has
+        rules for alternate formatting if the content is accessed on a mobile
+        device.
+      </p>
+      <p class="note">
+        <strong>NOTE:</strong> t enim ad minima veniam, quis nostrum
+        exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
+        commodi consequatur?
+      </p>
+
+      <h3 class="notme">Not Me!</h3>
+      <p>
+       I am very comfortable with CSS and I am excited to learn more about CSS. I've already used CSS to style my personal website and I am looking forward to applying more advanced techniques to create even better designs. I am particularly interested in learning about CSS Grid and Flexbox, as I believe they will allow me to create more complex and responsive layouts. Overall, I am eager to continue improving my CSS skills and to see how I can use them to create amazing web experiences.
+       In addition to my enthusiasm for CSS, I am also excited about the potential of using CSS in conjunction with other web technologies such as JavaScript and HTML to create dynamic and interactive web pages. I believe that mastering CSS will not only enhance my ability to design visually appealing websites but also enable me to create more engaging user experiences. I am looking forward to exploring the various features and capabilities of CSS and applying them to my future web development projects.
+       I am confident that with practice and dedication, I will become proficient in CSS and be able  to create stunning web designs that captivate users and provide seamless functionality. I am excited to embark on this learning journey and to see how CSS can transform my web development skills and open up new opportunities in the world of web design.
+       I am excited to create even more impressive and user-friendly websites.
+       I am also looking forward to learning about CSS animations and transitions, which can add a layer of interactivity and visual appeal to my web designs. I am excited to experiment with different animation techniques and to see how they can enhance the user experience on my websites. I believe that mastering CSS animations will allow me to create more engaging and dynamic web pages that capture users' attention and provide a memorable browsing experience. Overall, I am eager to continue expanding my knowledge of CSS and to see how it can help me create amazing web designs that stand out and provide exceptional user experiences.
+       I learnt about various css selectors and the new :is() selector is very useful as it allows us to group multiple selectors together and apply the same styles to them, which can help to reduce code duplication and make our CSS more efficient. I am excited to use the :is() selector in my future projects to simplify my CSS and make it easier to maintain. I am also looking forward to learning about other new CSS features and techniques that can help me create even better web designs. Overall, I am eager to continue improving my CSS skills and to see how I can use them to create amazing web experiences.
+      </p>
+
+      <h3>Me Neither!</h3>
+      <p>
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?
+      </p>
+    </article>
+  </body>
+</html>
