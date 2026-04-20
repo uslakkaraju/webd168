@@ -90,7 +90,7 @@ footer {
   font-size: 1.5rem; /* Increases the font size of the paragraph for better readability */
   
 }
-.hero-text .btn{
+.hero-text-btn{
   display: inline-block; /* Allows the button to have padding and margin */
   background-color: #e04555; /* Sets a red background color for the button */
   color: #fff; /* Sets the button text color to white */
@@ -99,7 +99,7 @@ footer {
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2); /* Adds a subtle shadow to the button */
   transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for background color and shadow on hover */
 }
-.hero-text .btn:hover {
+.hero-text-btn:hover {
   background-color: #c0392b; /* Darkens the button background on hover */
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3); /* Increases the shadow on hover for a more pronounced effect */
 
