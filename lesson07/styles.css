@@ -154,13 +154,13 @@ header p {
   display: flex; /* Keep navbar at the top of the page */
   align-items:center; /* Vertically center nav items */
   gap:1rem;
+  position: fixed; /* Fix navbar to the top */
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000; /* Ensure navbar is above other content */
   background-color: #aae1f9; /* Semi-transparent background */
   padding: 1rem; /* Space inside navbar */
-  z-index: 1000; /* Ensure navbar is above other content */
   box-shadow: 0 2px 10px rgba(0, 0, 0 /10%); /* Subtle shadow for depth */
 }
 
@@ -331,10 +331,10 @@ h2 {
 }
 
 /* Allow navbar items to wrap onto another row */
-    .navbar {
-        flex-wrap: wrap; /* Allows hamburger and menu to stack */
-        align-items: center; /* Keeps items aligned */
-        padding: 0.75rem 1rem; /* Slightly reduces navbar padding */
+.navbar {
+    flex-wrap: wrap; /* Allows hamburger and menu to stack */
+    align-items: center; /* Keeps items aligned */
+    padding: 0.75rem 1rem; /* Slightly reduces navbar padding */
     }
 
    /* Mobile nav menu is hidden by default */
