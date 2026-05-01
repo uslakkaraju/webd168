@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic character encoding and responsive viewport setup -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive SVG Cat</title>
+
+    <!-- Tailwind CSS CDN for utility classes used throughout the page -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+     <style>
+    /* --------------------------------------------------
+       CUSTOM CSS FOR THE LESSON DEMO
+       -------------------------------------------------- */
+
+    /* This animation makes a button briefly shrink and grow
+       when a student clicks it. */
+    @keyframes buttonClick {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.92); }
+      100% { transform: scale(1); }
+    }
+
+    /* Applied with JavaScript when a button is clicked. */
+    button.clicked {
+      animation: buttonClick 0.3s ease;
+    }
+
+    /* When the class blue-eyes is added to the SVG,
+       the eye-color elements change from green to blue. */
+    .blue-eyes .eye-color {
+      fill: #175282;
+    }
+
+    /* When the class sad is added, the mouth flips upside down
+       so the cat looks sad instead of happy. */
+    .sad .mouth {
+      transform: rotate(180deg) scale(0.5);
+      transform-origin: 340px 390px;
+    }
+
+    /* Animation for moving the pupil/iris shapes. */
+    @keyframes moveEyes {
+      20% { transform: translate(-18px, -20px); }
+      40% { transform: translate(0, 0); }
+      65% { transform: translate(18px, -20px); }
+      100% { transform: translate(18px, 0); }
+    }
+
+    /* Only animate the eye groups when move-around is active. */
+    .move-around .inner-eye-group {
+      animation: moveEyes 12s infinite;
+    }
+
+    /* Left whisker animation. */
+    @keyframes leftWhiskers {
+      20% { transform: rotate(5deg); }
+      60% { transform: rotate(-5deg); }
+    }
+
+    .move-around .left-whiskers {
+      animation: leftWhiskers 3s infinite;
+      transform-origin: 325px 350px;
+    }
+
+    /* Right whisker animation. */
+    @keyframes rightWhiskers {
+      5% { transform: rotate(-2deg); }
+      90% { transform: rotate(7deg); }
+    }
+
+    .move-around .right-whiskers {
+      animation: rightWhiskers 3s infinite;
+      transform-origin: 325px 350px;
+    }
+
+    /* This animation adds gentle movement to the full cat. */
+    @keyframes moveCat {
+      20% { transform: rotateY(10deg) rotateX(10deg); }
+      40% { transform: rotateY(25deg) rotateX(10deg); }
+      60% { transform: rotateY(-10deg) rotateX(-10deg); }
+      85% { transform: rotateY(-10deg) rotateX(-16deg); }
+    }
+
+    .move-around {
+      animation: moveCat 8s infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    /* Strong focus style for keyboard users. */
+    .lesson-button:focus-visible {
+      outline: 3px solid #1d4ed8;
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-t from-blue-200 to-white text-gray-800 font-serif px-4 py-6">
+
+    <!-- =========================================================
+         PAGE HEADER
+         Main heading introduces the topic of SVG.
+         ========================================================= -->
+    <header class="max-w-5xl mx-auto mb-6 text-center">
+        <h1 class="text-4xl font-bold text-blue-900 mb-2">SVG Essentials</h1>
+        <p class="text-lg text-gray-700">
+            An interactive example showing how SVG can be styled and animated with CSS and JavaScript.
+        </p>
+    </header>
+
+    <!-- =========================================================
+         CONTROL BUTTONS
+         These buttons add or remove classes from the SVG.
+         ========================================================= -->
+    <section aria-labelledby="controls-heading" class="max-w-5xl mx-auto mb-10">
+        <h2 id="controls-heading" class="sr-only">SVG controls</h2>
+
+        <div class="buttons flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3">
+            <!-- Adds the blue-eyes class to the SVG -->
+            <button type="button" data-add="blue-eyes"
+                class="control-btn inline-block uppercase bg-blue-200 hover:bg-blue-300 px-4 py-2 rounded w-64 text-center font-semibold transition">
+                Blue Eyes
+            </button>
+
+            <!-- Removes the blue-eyes class so the eyes return to green -->
+            <button type="button" data-remove="blue-eyes"
+                class="control-btn inline-block uppercase bg-green-200 hover:bg-green-300 px-4 py-2 rounded w-64 text-center font-semibold transition">
+                Green Eyes
+            </button>
+
+            <!-- Adds the sad class to flip the mouth -->
+            <button type="button" data-add="sad"
+                class="control-btn inline-block uppercase bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded w-64 text-center font-semibold transition">
+                Sad
+            </button>
+
+            <!-- Removes the sad class so the cat looks happy again -->
+            <button type="button" data-remove="sad"
+                class="control-btn inline-block uppercase bg-yellow-200 hover:bg-yellow-300 px-4 py-2 rounded w-64 text-center font-semibold transition">
+                Happy
+            </button>
+
+            <!-- Adds the move-around class to animate the cat -->
+            <button type="button" data-add="move-around"
+                class="control-btn inline-block uppercase bg-purple-200 hover:bg-purple-300 px-4 py-2 rounded w-64 text-center font-semibold transition">
+                Move Around
+            </button>
+
+            <!-- Removes the move-around class to stop movement -->
+            <button type="button" data-remove="move-around"
+                class="control-btn inline-block uppercase bg-red-200 hover:bg-red-300 px-4 py-2 rounded w-64 text-center font-semibold transition">
+                Sit Still
+            </button>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         SVG DISPLAY AREA
+         The SVG is inline, which allows direct CSS and JavaScript control.
+         ========================================================= -->
+    <main class="max-w-5xl mx-auto">
+        <section class="svg-container mx-auto max-w-4xl px-4 py-6 bg-white/60 rounded-xl shadow-md">
+            <!--
+                viewBox makes the SVG scalable.
+                role and aria-labelledby improve accessibility.
+            -->
+            <svg class="cat w-full h-auto"
+                viewBox="0 0 640 480"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-labelledby="catTitle catDesc">
+
+                <title id="catTitle">Cartoon cat illustration</title>
+                <desc id="catDesc">An interactive cartoon cat whose eyes, expression, and movement can be changed with buttons.</desc>
+
+                <!-- Cat head / face base shape -->
+                <path
+                    d="m119.00002,184.5c0,0 11.25,-157.50001 -36,-164.25001c-47.25,-6.75 156,15.75001 159.75,96.00001c3.75,80.25 29.25,-16.5 137.25,-11.25c108.00001,5.25 53.25001,-111.75001 84.00001,-99.00001l30.24997,12.00001c0,0 81.50003,17.25 44.00003,125.25c-37.5,108 -20.25,174.75 -20.75003,174.75c-0.50003,0 47.75003,120.75 79.25003,123.75c31.5,3 -129,-5.25 -132.75,-3c-3.75,2.25 -24.75,22.50001 -77.25001,27.75001c-52.5,5.25 -167.25,-48.00001 -167.75002,-48.00001c-0.50002,0 -152.49998,35.25001 -153,35.25c-0.50002,-0.00001 116.75002,-83.25 108.50002,-107.25c-8.25,-24 -89.25,-87 -71.25,-120.75c18,-33.75 15.75,-41.25 15.75,-41.25z"
+                    fill="#999999" />
+
+                <!-- Right eye outer shape -->
+                <g transform="rotate(-10 382.5 241)">
+                    <ellipse fill="#ffffff" cx="382.5" cy="241" rx="56.5" ry="84.75" />
+
+                    <!-- Right eye inner group moves during animation -->
+                    <g class="inner-eye-group">
+                        <ellipse class="eye-color" fill="#1b6811" cx="382.38" cy="286.68" rx="31" ry="35" />
+                        <ellipse fill="#ffffff" cx="380.38" cy="303.68" rx="6" ry="6" />
+                    </g>
+                </g>
+
+                <!-- Left eye outer shape -->
+                <g>
+                    <ellipse fill="#ffffff" cx="274.12" cy="239.32" rx="56.5" ry="84.75" />
+
+                    <!-- Left eye inner group moves during animation -->
+                    <g class="inner-eye-group">
+                        <ellipse class="eye-color" fill="#1b6811" cx="274" cy="285" rx="31" ry="35" />
+                        <ellipse fill="#ffffff" cx="272" cy="302" rx="6" ry="6" />
+                    </g>
+                </g>
+
+                <!-- Nose -->
+                <path
+                    d="m295,337c2,2 25,-39 64,-7c39,32 8,13 -21,31c-29,18 -45,-26 -43,-24z"
+                    fill="#fcbfdb" />
+
+                <!-- Decorative invisible guide path from original drawing -->
+                <path
+                    d="m236,384c0,0 154,106 224,17c70,-89 -203,-2 -203,-2c0,0 -21,-15 -21,-15z"
+                    fill="none" />
+
+                <!-- Mouth changes shape when the sad class is added -->
+                <path class="mouth"
+                    d="m248.04,375.86c26.65,15.02 95.79,70.09 209.06,-1.67c113.28,-71.76 0,10.85 0,10.85c0,0 -138.26,80.94 -214.89,-1.67c-76.63,-82.61 -20.82,-22.53 5.83,-7.51z"
+                    fill="#000000" />
+
+                <!-- Left whiskers -->
+                <g class="left-whiskers">
+                    <line x1="297" y1="353" x2="102" y2="301" stroke="#dddddd" stroke-width="3" />
+                    <line x1="300" y1="358" x2="105" y2="344" stroke="#dddddd" stroke-width="3" />
+                </g>
+
+                <!-- Right whiskers -->
+                <g class="right-whiskers">
+                    <line x1="354" y1="361" x2="571" y2="296" stroke="#dddddd" stroke-width="3" />
+                    <line x1="363" y1="364" x2="556" y2="373" stroke="#dddddd" stroke-width="3" />
+                </g>
+            </svg>
+        </section>
+
+        <!-- =====================================================
+             EXPLANATION SECTION
+             Uses a responsive grid for readable text layout.
+             ===================================================== -->
+        <section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 text-lg leading-relaxed">
+            <article class="bg-white/60 rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-blue-900 mb-3">What is SVG?</h2>
+                <p>
+                    SVG stands for <strong>Scalable Vector Graphics</strong>. It is an XML-based image format used to create shapes,
+                    icons, illustrations, logos, and other graphics directly in a web page. Because SVG uses code instead of pixels,
+                    the image stays sharp at any screen size.
+                </p>
+            </article>
+
+            <article class="bg-white/60 rounded-xl shadow-md p-6">
+                <h2 class="text-2xl font-bold text-blue-900 mb-3">Why use inline SVG?</h2>
+                <p>
+                    Inline SVG works especially well with HTML, CSS, and JavaScript. You can target individual SVG parts with classes,
+                    change colors, animate features like eyes or whiskers, and add accessibility information such as titles and
+                    descriptions for screen readers.
+                </p>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        /* =========================================================
+           JAVASCRIPT INTERACTIVITY
+           Each button either adds or removes a class from the SVG.
+           CSS then updates the appearance or animation.
+           ========================================================= */
+
+        // Select all control buttons inside the .buttons container
+        const buttons = document.querySelectorAll('.buttons button');
+
+        // Select the main SVG element
+        const catSVG = document.querySelector('.cat');
+
+        // Add a click event to every button
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const addClass = button.getAttribute('data-add');
+                const removeClass = button.getAttribute('data-remove');
+
+                // Add a class if the button includes data-add
+                if (addClass) {
+                    catSVG.classList.add(addClass);
+                }
+
+                // Remove a class if the button includes data-remove
+                if (removeClass) {
+                    catSVG.classList.remove(removeClass);
+                }
+
+                // Animate the button itself for visual feedback
+                button.classList.add('clicked');
+                setTimeout(() => {
+                    button.classList.remove('clicked');
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
