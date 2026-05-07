@@ -1,0 +1,563 @@
+/* ============================================
+   Modern CSS Feature #1: CSS Variables
+   ============================================ */
+:root {
+  --primary-color: #2a7ae2;
+  --primary-dark: #1e5c96;
+  --primary-light: #5b9ef5;
+  --accent-color: #f4a261;
+  --accent-dark: #d67a3a;
+  --secondary-color: #e63946;
+  --success-color: #06a77d;
+  --warning-color: #ffa500;
+  --info-color: #17a2b8;
+  
+  --background-light: #f8f9fa;
+  --background-white: #ffffff;
+  --text-dark: #2c3e50;
+  --text-light: #6c757d;
+  --border-light: #dee2e6;
+  
+  --main-spacing: 1rem;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
+  
+  --transition-smooth: 0.3s ease;
+}
+
+/* ============================================
+   Accessibility: Focus States & High Contrast
+   ============================================ */
+:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  box-shadow: 0 0 0 3px rgba(42, 122, 226, 0.25);
+}
+
+/* ============================================
+   Modern CSS Feature #2: clamp() for responsive text
+   ============================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  color: var(--text-dark);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.75rem);
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Responsive body text with high contrast */
+p {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  color: var(--text-dark);
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+
+.lead {
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  color: var(--text-dark);
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+/* ============================================
+   Modern CSS Feature #3: :is() Selector
+   ============================================ */
+/* Group multiple selectors for consistent styling */
+:is(h1, h2, h3) {
+  transition: color var(--transition-smooth);
+}
+
+:is(h1, h2, h3):hover {
+  color: var(--primary-dark);
+}
+
+/* Accessible link styling */
+:is(a, button) {
+  transition: all var(--transition-smooth);
+}
+
+/* ============================================
+   Modern CSS Feature #4: :has() Selector
+   ============================================ */
+/* Style cards with images */
+.card:has(.profile-image) {
+  border: 2px solid var(--accent-color);
+  background: var(--background-white);
+}
+
+/* Style hobby cards differently from skills cards */
+.hobby-card:has(.card-text) {
+  border: 1px solid var(--border-light);
+  background: linear-gradient(135deg, rgba(42, 122, 226, 0.02) 0%, rgba(42, 122, 226, 0.05) 100%);
+}
+
+.hobby-card:has(.card-text):hover {
+  border-color: var(--primary-light);
+}
+
+/* ============================================
+   Body and Global Styles
+   ============================================ */
+body {
+  background-color: var(--background-white);
+  color: var(--text-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ============================================
+   Header/Navbar Styles
+   ============================================ */
+.navbar {
+  background-color: var(--background-white);
+  border-bottom: 2px solid var(--border-light);
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: var(--primary-color) !important;
+}
+
+.nav-link {
+  color: var(--text-dark) !important;
+  font-weight: 500;
+  position: relative;
+  margin: 0 0.5rem;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width var(--transition-smooth);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero-section {
+  background: linear-gradient(135deg, rgba(42, 122, 226, 0.05) 0%, rgba(244, 162, 97, 0.05) 100%);
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.profile-image {
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+  max-width: 100%;
+  height: auto;
+}
+
+.profile-image:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+figure {
+  margin: 0;
+}
+
+figcaption {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ============================================
+   Button Styles
+   ============================================ */
+.btn {
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  transition: all var(--transition-smooth);
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(42, 122, 226, 0.3);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-width: 2px;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus-visible {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Icon styling in buttons */
+.btn i {
+  font-size: 1.2rem;
+}
+
+/* ============================================
+   Card Styles
+   ============================================ */
+.card {
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  transition: all var(--transition-smooth);
+  background-color: var(--background-white);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.card-text {
+  color: var(--text-dark);
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* Hover effect for cards */
+.hover-lift {
+  cursor: pointer;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--primary-light);
+}
+
+.hover-lift:focus-within {
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* Hobby card specific */
+.hobby-card {
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.hobby-card-image {
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  transition: transform var(--transition-smooth);
+}
+
+.hobby-card:hover .hobby-card-image {
+  transform: scale(1.05);
+}
+
+/* Skills card styling */
+.skills-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: white;
+  border: none;
+}
+
+.skills-card .card-title {
+  color: white;
+}
+
+.skills-card .card-text,
+.skills-card p {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.skills-card li {
+  color: white;
+}
+
+/* ============================================
+   Approach Card Styles
+   ============================================ */
+.approach-card {
+  padding: 1.5rem;
+  border-left: 4px solid var(--primary-color);
+  background: var(--background-light);
+  border-radius: 8px;
+  transition: all var(--transition-smooth);
+}
+
+.approach-card:hover {
+  background: var(--background-white);
+  border-left-color: var(--accent-color);
+  box-shadow: var(--card-shadow);
+  transform: translateX(4px);
+}
+
+.approach-card h3 {
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   Section Styles
+   ============================================ */
+section {
+  position: relative;
+}
+
+section h2 {
+  color: var(--text-dark);
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.text-center h2::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ============================================
+   List Styles
+   ============================================ */
+.list-unstyled li {
+  transition: all var(--transition-smooth);
+  padding-left: 0;
+}
+
+.list-unstyled li:hover {
+  padding-left: 0.5rem;
+}
+
+/* ============================================
+   Image Styles
+   ============================================ */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   Footer Styles
+   ============================================ */
+footer {
+  background-color: #1a1a1a;
+  color: #f8f9fa;
+  margin-top: auto;
+}
+
+footer p {
+  color: #f8f9fa;
+  margin-bottom: 0;
+}
+
+footer a {
+  color: var(--primary-light);
+  text-decoration: none;
+  transition: color var(--transition-smooth);
+}
+
+footer a:hover,
+footer a:focus-visible {
+  color: var(--accent-color);
+}
+
+/* ============================================
+   Utility Spacing
+   ============================================ */
+.gap-4 {
+  gap: 1.5rem;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 768px) {
+  h1 {
+    margin-bottom: 1.25rem;
+  }
+
+  h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .hero-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  section h2::after {
+    width: 80px;
+  }
+
+  .hobby-card-image {
+    height: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .display-5 {
+    font-size: 2rem;
+  }
+
+  .gap-3 {
+    gap: 0.75rem !important;
+  }
+
+  .d-flex.gap-3 {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .navbar {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+
+  .hero-section .row {
+    gap: 1.5rem !important;
+  }
+
+  .hobby-card-image {
+    height: 180px;
+  }
+}
+
+/* ============================================
+   Accessibility: Motion Preferences
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Accessibility: High Contrast Mode
+   ============================================ */
+@media (prefers-contrast: more) {
+  body {
+    color: var(--text-dark);
+  }
+
+  .btn-primary {
+    border-width: 2px;
+  }
+
+  .card {
+    border-width: 2px;
+  }
+
+  :is(h1, h2, h3) {
+    letter-spacing: 0.5px;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  header,
+  footer {
+    display: none;
+  }
+
+  .btn {
+    display: none;
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   Dark Mode Support (Future Enhancement)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  /* Can be enhanced with dark mode colors */
+}
