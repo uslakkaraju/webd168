@@ -68,3 +68,38 @@ header {
     padding-bottom: 1rem;
   }
 }
+
+/* ========================================
+   Fade Image Transition Effect
+   ======================================== */
+
+.fade-img {
+  opacity: 0.5;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform-origin: center;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  cursor: pointer;
+}
+
+.fade-img:hover {
+  opacity: 1;
+  transform: scale(2);
+}
+
+/* Parent Container for Image - Prevent Overlapping */
+.img-container {
+  overflow: hidden;
+  padding-bottom: 2rem;
+}
+
+/* ========================================
+   Accessibility: Reduce Motion
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
