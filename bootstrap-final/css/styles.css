@@ -1,0 +1,322 @@
+/* ========================================
+   Custom Styles — Uma Lakkaraju Portfolio
+   Built on top of Bootstrap 5.3
+   All colors below have been chosen to meet
+   WCAG 2.1 AA contrast (>= 4.5:1) for body text.
+   ======================================== */
+
+/* ----------------------------------------
+   1. Base / Layout
+---------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  color: #1f2330; /* near-black for strong contrast on white */
+  /* Offset for the fixed-top navbar so anchor links land below it */
+  scroll-padding-top: 80px;
+}
+
+main {
+  /* Make sure first section clears the fixed nav */
+  padding-top: 0;
+}
+
+section {
+  padding: 4rem 0;
+}
+
+.section-heading {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.section-heading::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #2a2f6d;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+}
+
+section .text-center .section-heading::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ----------------------------------------
+   2. Skip link (accessibility)
+---------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  background: #2a2f6d;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  outline: 3px solid #ffc107;
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------
+   3. Navbar
+---------------------------------------- */
+#mainNav {
+  /* Slightly darker than bg-dark so contrast against white text stays > 4.5:1 */
+  background-color: #0f1226 !important;
+}
+
+#mainNav .navbar-brand {
+  letter-spacing: 0.5px;
+}
+
+#mainNav .nav-link {
+  color: #e6e8f5;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+#mainNav .nav-link:hover,
+#mainNav .nav-link:focus,
+#mainNav .nav-link.active {
+  color: #ffd54a;
+}
+
+/* ----------------------------------------
+   4. Hero header
+---------------------------------------- */
+.hero {
+  /* Dark gradient to keep white text well above 4.5:1 contrast */
+  background: linear-gradient(135deg, #2a2f6d 0%, #4a2b7a 100%);
+  padding: 8rem 0 6rem;
+  margin-top: 56px; /* offset for fixed navbar */
+}
+
+.hero-eyebrow {
+  letter-spacing: 2px;
+  color: #ffd54a;
+}
+
+.hero-lead {
+  max-width: 700px;
+  font-size: 1.15rem;
+}
+
+.hero .btn-light {
+  color: #2a2f6d;
+}
+
+.hero .btn-light:hover,
+.hero .btn-light:focus {
+  background-color: #ffd54a;
+  border-color: #ffd54a;
+  color: #1f2330;
+}
+
+.hero .btn-outline-light:hover,
+.hero .btn-outline-light:focus {
+  background-color: #ffffff;
+  color: #2a2f6d;
+}
+
+/* ----------------------------------------
+   5. About list
+---------------------------------------- */
+.about-list {
+  padding-left: 1.25rem;
+}
+
+.about-list li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+/* ----------------------------------------
+   6. Skill cards
+---------------------------------------- */
+.skill-card {
+  border: 1px solid #e3e5ef;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-card:hover,
+.skill-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(15, 18, 38, 0.12) !important;
+}
+
+.skill-icon {
+  font-size: 2.5rem;
+  color: #2a2f6d;
+}
+
+/* ----------------------------------------
+   7. Skills table
+---------------------------------------- */
+caption {
+  caption-side: bottom;
+  text-align: left;
+  font-style: italic;
+  color: #495057; /* 7:1 contrast on white */
+  padding-top: 0.5rem;
+}
+
+.table > :not(caption) > * > * {
+  vertical-align: middle;
+}
+
+.rating i {
+  margin-right: 2px;
+  font-size: 1rem;
+}
+
+/* ----------------------------------------
+   8. Project cards
+---------------------------------------- */
+.project-card {
+  border: 1px solid #e3e5ef;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(15, 18, 38, 0.12) !important;
+}
+
+.project-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
+  background-color: #f1f3f9;
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.project-card a:hover .project-img,
+.project-card a:focus-visible .project-img {
+  transform: scale(1.03);
+  opacity: 0.92;
+}
+
+.project-card a:focus-visible {
+  outline: 3px solid #ffd54a;
+  outline-offset: 2px;
+}
+
+/* Outline button: darker primary so text contrast stays >= 4.5:1 */
+.btn-outline-primary {
+  --bs-btn-color: #2a2f6d;
+  --bs-btn-border-color: #2a2f6d;
+  --bs-btn-hover-bg: #2a2f6d;
+  --bs-btn-hover-border-color: #2a2f6d;
+  --bs-btn-active-bg: #1f2350;
+  --bs-btn-active-border-color: #1f2350;
+}
+
+.project-placeholder {
+  height: 200px;
+  background: linear-gradient(135deg, #2a2f6d 0%, #4a2b7a 100%);
+  color: #ffffff;
+  font-size: 4rem;
+}
+
+/* ----------------------------------------
+   9. Forms
+---------------------------------------- */
+.form-control:focus,
+.form-select:focus {
+  border-color: #2a2f6d;
+  box-shadow: 0 0 0 0.2rem rgba(42, 47, 109, 0.25);
+}
+
+.form-label {
+  font-weight: 500;
+  color: #1f2330;
+}
+
+legend.form-label {
+  font-weight: 500;
+}
+
+/* ----------------------------------------
+   10. Buttons
+---------------------------------------- */
+.btn-success {
+  /* Darker green for AA contrast with white text (>= 4.5:1) */
+  background-color: #1f7a4d;
+  border-color: #1f7a4d;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #19623d;
+  border-color: #19623d;
+}
+
+/* ----------------------------------------
+   11. Footer
+---------------------------------------- */
+footer {
+  background-color: #0f1226 !important;
+}
+
+footer p {
+  color: #e6e8f5; /* > 4.5:1 on dark footer */
+}
+
+/* ----------------------------------------
+   12. Responsive tweaks
+---------------------------------------- */
+@media (max-width: 768px) {
+  .hero {
+    padding: 6rem 0 4rem;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  section {
+    padding: 3rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.85rem;
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+  }
+}
+
+/* ----------------------------------------
+   13. Reduced motion
+---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
